@@ -1,0 +1,8 @@
+/* Base styles from the starter */
+label { float: left; width: 150px; }
+#container { width: 700px; margin: auto; background-color: beige; }
+main { padding: 50px; }
+
+/* Assignment helpers */
+.error { color:#b91c1c; font-size:12px; display:block; margin-top:4px; }
+.help  { color:#6b7280; font-size:12px; }
