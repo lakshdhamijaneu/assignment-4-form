@@ -226,7 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let dynamicError = null;
 
   options.addEventListener("change", () => {
-    console.log("test");
     dynamicArea.innerHTML = ""; // clear previous checkbox + input
 
     // Validate option selection
