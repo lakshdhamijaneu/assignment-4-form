@@ -116,11 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
       validateStreet1(),
       validateComments(),
       validateSource(),
-      validateDynamic()
+      validateDynamic(),
     ].every(Boolean);
 
-  submitBtn.disabled = !allValid;
-}
+    submitBtn.disabled = !allValid;
+  }
 
   // Event listeners for live validation
   firstName.addEventListener("input", () => {
@@ -247,15 +247,14 @@ document.addEventListener("DOMContentLoaded", () => {
     validateForm();
   });
 
-validateDynamic()
-function validateDynamic() {
-  if (dynamicCheckbox && dynamicCheckbox.checked) {
-    if (!dynamicInput || dynamicInput.value.trim().length < 2) {
-      dynamicError.textContent = "This field is required (min 2 chars)";
-      return false;
+  function validateDynamic() {
+    if (dynamicCheckbox && dynamicCheckbox.checked) {
+      if (!dynamicInput || dynamicInput.value.trim().length < 2) {
+        dynamicError.textContent = "This field is required (min 2 chars)";
+        return false;
+      }
+      dynamicError.textContent = "";
     }
-    dynamicError.textContent = "";
+    return true; // if no checkbox or unchecked, it's valid
   }
-  return true; // if no checkbox or unchecked, it's valid
-}
 });
