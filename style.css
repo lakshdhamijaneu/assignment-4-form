@@ -19,3 +19,9 @@ main {
   font-size: 12px;
   margin-left: 10px;
 }
+
+#street2Counter {
+  font-size: 12px;
+  color: gray;
+  margin-left: 150px;
+}

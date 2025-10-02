@@ -156,4 +156,35 @@ document.addEventListener("DOMContentLoaded", () => {
       validateForm();
     })
   );
+
+  phone.addEventListener("input", (e) => {
+    let digits = e.target.value.replace(/\D/g, ""); // keep only numbers
+    if (digits.length > 10) digits = digits.substring(0, 10);
+
+    let formatted = "";
+    if (digits.length > 0) {
+      formatted = "(" + digits.substring(0, 3);
+    }
+    if (digits.length >= 4) {
+      formatted += ") " + digits.substring(3, 6);
+    }
+    if (digits.length >= 7) {
+      formatted += "-" + digits.substring(6, 10);
+    }
+
+    e.target.value = formatted;
+    validatePhone();
+    validateForm();
+  });
+
+  const street2Counter = document.getElementById("street2Counter");
+
+  street2.addEventListener("input", () => {
+    let len = street2.value.length;
+    if (len > 20) {
+      street2.value = street2.value.substring(0, 20); // hard cap at 20 chars
+      len = 20;
+    }
+    street2Counter.textContent = `${len}/20 characters used`;
+  });
 });
