@@ -75,10 +75,10 @@ This project implements an **interactive feedback form** with full client-side v
 
 ## 📂 Project Structure
 Assignment-4/
-│── Form.html # Main form structure
-│── style.css # Styles (form layout, errors, chatbot UI)
-│── script.js # JavaScript (validations, dynamic behavior, chatbot)
-│── README.md # Documentation
+├── Form.html       # Main form structure
+├── style.css       # Styles (form layout, errors, chatbot UI)
+├── script.js       # JavaScript (validations, dynamic behavior, chatbot)
+└── README.md       # Documentation
 
 ---
 
