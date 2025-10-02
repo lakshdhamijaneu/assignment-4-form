@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Error spans
   const errors = {
+    title: document.getElementById("titleError"),
     firstName: document.getElementById("firstNameError"),
     lastName: document.getElementById("lastNameError"),
     email: document.getElementById("emailError"),
@@ -22,15 +23,26 @@ document.addEventListener("DOMContentLoaded", () => {
     street1: document.getElementById("street1Error"),
     comments: document.getElementById("commentsError"),
     source: document.getElementById("sourceError"),
+    option: document.getElementById("optionError"),
   };
 
   // Regex patterns
-  const nameRegex = /^[A-Za-z0-9]{2,20}$/;
+  const nameRegex = /^[A-Za-z0-9 ]{2,20}$/;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@northeastern\.edu$/;
   const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
   const zipRegex = /^\d{5}$/;
 
   // Validation functions
+  function validateTitle() {
+    const selected = form.querySelector("input[name='title']:checked");
+    if (!selected) {
+      errors.title.textContent = "Please select a title";
+      return false;
+    }
+    errors.title.textContent = "";
+    return true;
+  }
+
   function validateFirstName() {
     if (!nameRegex.test(firstName.value)) {
       errors.firstName.textContent = "Only letters/numbers, 2-20 chars";
@@ -105,9 +117,19 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
+  function validateOption() {
+    if (!options.value) {
+      errors.option.textContent = "Please select a category";
+      return false;
+    }
+    errors.option.textContent = "";
+    return true;
+  }
+
   // Enable submit only if all pass
   function validateForm() {
     const allValid = [
+      validateTitle(),
       validateFirstName(),
       validateLastName(),
       validateEmail(),
@@ -116,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       validateStreet1(),
       validateComments(),
       validateSource(),
+      validateOption(),
       validateDynamic(),
     ].every(Boolean);
 
@@ -123,6 +146,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Event listeners for live validation
+  form.querySelectorAll("input[name='title']").forEach((rb) =>
+    rb.addEventListener("change", () => {
+      validateTitle();
+      validateForm();
+    })
+  );
   firstName.addEventListener("input", () => {
     validateFirstName();
     validateForm();
@@ -189,7 +218,6 @@ document.addEventListener("DOMContentLoaded", () => {
     street2Counter.textContent = `${len}/20 characters used`;
   });
 
-  // ========== Step 4: Dynamic Checkbox + Text Field ==========
   const options = document.getElementById("options");
   const dynamicArea = document.getElementById("dynamicCheckboxArea");
 
@@ -198,7 +226,15 @@ document.addEventListener("DOMContentLoaded", () => {
   let dynamicError = null;
 
   options.addEventListener("change", () => {
+    console.log("test");
     dynamicArea.innerHTML = ""; // clear previous checkbox + input
+
+    // Validate option selection
+    if (!options.value) {
+      errors.option.textContent = "Please select a category";
+    } else {
+      errors.option.textContent = "";
+    }
 
     if (options.value) {
       // Create checkbox
@@ -244,6 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
+
     validateForm();
   });
 
@@ -257,4 +294,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return true; // if no checkbox or unchecked, it's valid
   }
+
+  const resultsTable = document
+    .getElementById("resultsTable")
+    .querySelector("tbody");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // stop normal form submission
+
+    // Collect form data
+    const title =
+      form.querySelector("input[name='title']:checked")?.value || "";
+    const sources = Array.from(
+      form.querySelectorAll("input[name='source']:checked")
+    )
+      .map((cb) => cb.value)
+      .join(", ");
+    const optionSelected = options.value || "";
+    const extraInput =
+      dynamicCheckbox && dynamicCheckbox.checked && dynamicInput
+        ? dynamicInput.value
+        : "";
+
+    // Create row
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${title}</td>
+      <td>${firstName.value}</td>
+      <td>${lastName.value}</td>
+      <td>${email.value}</td>
+      <td>${phone.value}</td>
+      <td>${zip.value}</td>
+      <td>${street1.value}</td>
+      <td>${street2.value}</td>
+      <td>${sources}</td>
+      <td>${optionSelected}</td>
+      <td>${extraInput}</td>
+      <td>${comments.value}</td>
+    `;
+    resultsTable.appendChild(row);
+
+    // Reset form
+    form.reset();
+    dynamicArea.innerHTML = ""; // clear dynamic checkbox/input
+    street2Counter.textContent = "0/20 characters used";
+
+    // Disable submit again
+    submitBtn.disabled = true;
+  });
 });

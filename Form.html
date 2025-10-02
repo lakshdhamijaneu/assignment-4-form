@@ -3,7 +3,7 @@
   <head>
     <title>Feedback</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="./script.js"  defer></script>
+    <script src="./script.js" defer></script>
   </head>
   <body>
     <div id="container">
@@ -17,6 +17,7 @@
           <input type="radio" name="title" value="miss" required /> Miss
           <input type="radio" name="title" value="mr" required /> Mr.
           <input type="radio" name="title" value="mrs" required /> Mrs.
+          <span class="error" id="titleError"></span>
           <br /><br />
 
           <label for="firstName">First Name*:</label>
@@ -44,7 +45,7 @@
             type="text"
             name="emailId"
             id="emailId"
-            placeholder="yourname@domain.com"
+            placeholder="yourname@northeastern.edu"
           />
           <span class="error" id="emailError"></span>
           <br /><br />
@@ -91,7 +92,7 @@
           <span class="error" id="sourceError"></span>
           <br /><br />
 
-          <label for="options">Choose an option*:</label>
+          <label for="options">Category*:</label>
           <select id="options" name="options">
             <option value="">--Select--</option>
             <option value="opt1">Option 1</option>
@@ -100,6 +101,7 @@
             <option value="opt4">Option 4</option>
             <option value="opt5">Option 5</option>
           </select>
+          <span class="error" id="optionError"></span>
           <div id="dynamicCheckboxArea"></div>
           <br /><br />
 
@@ -117,8 +119,33 @@
           <button type="submit" id="submitBtn" disabled>Submit</button>
           <button type="reset">Reset</button>
         </form>
-        <div id="results"></div>
       </main>
+    </div>
+    <div id="resultsContainer">
+      <h3>Submission Results</h3>
+      <table
+        id="resultsTable"
+        border="1"
+        style="border-collapse: collapse; width: 100%"
+      >
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Zip</th>
+            <th>Street 1</th>
+            <th>Street 2</th>
+            <th>How Heard</th>
+            <th>Option</th>
+            <th>Extra Input</th>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
   </body>
 </html>
