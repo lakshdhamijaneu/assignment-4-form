@@ -113,6 +113,5 @@ Assignment-4/
 
 ## 👨‍💻 Author
 - **Name**: Laksh Dhamija  
-- **Course**: Northeastern University – Assignment 4  
-- **Email**: (your NU email here)
+- **Email**: dhamija.l@northeastern.edu
 
