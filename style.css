@@ -1,8 +1,21 @@
-/* Base styles from the starter */
-label { float: left; width: 150px; }
-#container { width: 700px; margin: auto; background-color: beige; }
-main { padding: 50px; }
+label {
+  float: left;
+  width: 150px;
+}
 
-/* Assignment helpers */
-.error { color:#b91c1c; font-size:12px; display:block; margin-top:4px; }
-.help  { color:#6b7280; font-size:12px; }
+#container {
+  width: 700px;
+  margin: auto;
+  background-color: beige;
+}
+
+main {
+  padding: 50px;
+}
+
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-left: 10px;
+}
