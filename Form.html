@@ -1,62 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
- <head>
-  <title>Feedback</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
- </head>
- <body>
- <div id="container">
-	 
-	 <main>
-	 <h2>Feeback</h2>
-	 <h3>Love something? Hate something? Let us know!</h3>
-		 Note : Fields marked with an asterisk(*) are mandatory
-		 <br><br>
-		 <form method="post" novalidate>
-			<label>Title*:</label>
-			<input type="radio" name="title" id="miss" value="miss" required="required"/>Miss
-			<input type="radio" name="title" id="mr" value="mr" required="required"/>Mr.
-			<input type="radio" name="title" id="mrs" value="mrs" required="required"/>Mrs.
-			<br><br>
-			<label for="firstName">First Name*:</label>
-			<input type="text" name="firstName" id="firstName" placeholder="First Name" />	
-			<br><br>
-			
+  <head>
+    <title>Feedback</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div id="container">
+      <main>
+        <h2>Feedback</h2>
+        <h3>Love something? Hate something? Let us know!</h3>
+        Note : Fields marked with an asterisk(*) are mandatory
+        <br /><br />
+        <form id="feedbackForm" method="post" novalidate>
+          <label>Title*:</label>
+          <input type="radio" name="title" value="miss" required /> Miss
+          <input type="radio" name="title" value="mr" required /> Mr.
+          <input type="radio" name="title" value="mrs" required /> Mrs.
+          <br /><br />
 
-			<label for="lastName">Last Name*:</label>
-			<input type="text" name="lastName" id="lastName" placeholder="Last Name" />
-			<br><br>
-			
+          <label for="firstName">First Name*:</label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            placeholder="First Name"
+          />
+          <span class="error" id="firstNameError"></span>
+          <br /><br />
 
-			<label for="emailId">Email Id*:</label>
-			<input type="text" name="emailId" id="emailId" placeholder="yourname@domain.com" />
-			<br><br>
-			
+          <label for="lastName">Last Name*:</label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            placeholder="Last Name"
+          />
+          <span class="error" id="lastNameError"></span>
+          <br /><br />
 
-			<label for="phoneNumber">Phone Number*:</label>
-			<input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" />
-			<br><br>
-			
-            <label for="zipcode">ZipCode*:</label>
-			<input type="text" name="zipcode" id="zipcode" placeholder="xxxxxx" />
-			<br><br>
-             
-            <label for="zipcode">How did you hear*:</label>
-			<input type='checkbox' name="source" value="facebook" /> Facebook
-            <input type='checkbox' name="source" value="google" /> Google
-            <input type='checkbox' name="source" value="yelp" /> Yelp 
-			<br><br> 
-             
-			<label for="comments">Comments*:</label>
-			<textarea name="text" id="comments" placeholder="Your comments" rows="5" cols="25"></textarea>
-			<br><br>
-			<input type="Submit">
-			<input type="Reset">
-			<br><br>
-		 </form>
-		 <div id="results"></div>
-	 </main>
- </div>
- </body>
+          <label for="emailId">Email Id*:</label>
+          <input
+            type="text"
+            name="emailId"
+            id="emailId"
+            placeholder="yourname@domain.com"
+          />
+          <span class="error" id="emailError"></span>
+          <br /><br />
+
+          <label for="phoneNumber">Phone Number*:</label>
+          <input
+            type="text"
+            name="phoneNumber"
+            id="phoneNumber"
+            placeholder="xxx-xxx-xxxx"
+          />
+          <span class="error" id="phoneError"></span>
+          <br /><br />
+
+          <label for="zipcode">ZipCode*:</label>
+          <input type="text" name="zipcode" id="zipcode" placeholder="xxxxxx" />
+          <span class="error" id="zipError"></span>
+          <br /><br />
+
+          <label for="street1">Street Address 1*:</label>
+          <input
+            type="text"
+            name="street1"
+            id="street1"
+            placeholder="Street Address 1"
+          />
+          <span class="error" id="street1Error"></span>
+          <br /><br />
+
+          <label for="street2">Street Address 2:</label>
+          <input
+            type="text"
+            name="street2"
+            id="street2"
+            placeholder="Street Address 2"
+          />
+          <div id="street2Counter">0/20 characters used</div>
+          <br /><br />
+
+          <label for="source">How did you hear*:</label>
+          <input type="checkbox" name="source" value="facebook" /> Facebook
+          <input type="checkbox" name="source" value="google" /> Google
+          <input type="checkbox" name="source" value="yelp" /> Yelp
+          <span class="error" id="sourceError"></span>
+          <br /><br />
+
+          <label for="options">Choose an option*:</label>
+          <select id="options" name="options">
+            <option value="">--Select--</option>
+            <option value="opt1">Option 1</option>
+            <option value="opt2">Option 2</option>
+            <option value="opt3">Option 3</option>
+            <option value="opt4">Option 4</option>
+            <option value="opt5">Option 5</option>
+          </select>
+          <div id="dynamicCheckboxArea"></div>
+          <br /><br />
+
+          <label for="comments">Comments*:</label>
+          <textarea
+            name="comments"
+            id="comments"
+            placeholder="Your comments"
+            rows="5"
+            cols="25"
+          ></textarea>
+          <span class="error" id="commentsError"></span>
+          <br /><br />
+
+          <button type="submit" id="submitBtn" disabled>Submit</button>
+          <button type="reset">Reset</button>
+        </form>
+        <div id="results"></div>
+      </main>
+    </div>
+  </body>
 </html>
