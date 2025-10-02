@@ -25,3 +25,8 @@ main {
   color: gray;
   margin-left: 150px;
 }
+
+#dynamicCheckboxArea {
+  margin-left: 150px;
+  margin-top: 5px;
+}

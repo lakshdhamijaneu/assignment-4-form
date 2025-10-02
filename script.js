@@ -116,10 +116,11 @@ document.addEventListener("DOMContentLoaded", () => {
       validateStreet1(),
       validateComments(),
       validateSource(),
+      validateDynamic()
     ].every(Boolean);
 
-    submitBtn.disabled = !allValid;
-  }
+  submitBtn.disabled = !allValid;
+}
 
   // Event listeners for live validation
   firstName.addEventListener("input", () => {
@@ -187,4 +188,74 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     street2Counter.textContent = `${len}/20 characters used`;
   });
+
+  // ========== Step 4: Dynamic Checkbox + Text Field ==========
+  const options = document.getElementById("options");
+  const dynamicArea = document.getElementById("dynamicCheckboxArea");
+
+  let dynamicCheckbox = null;
+  let dynamicInput = null;
+  let dynamicError = null;
+
+  options.addEventListener("change", () => {
+    dynamicArea.innerHTML = ""; // clear previous checkbox + input
+
+    if (options.value) {
+      // Create checkbox
+      dynamicCheckbox = document.createElement("input");
+      dynamicCheckbox.type = "checkbox";
+      dynamicCheckbox.id = "dynamicCheck";
+      dynamicCheckbox.name = "dynamicCheck";
+
+      const cbLabel = document.createElement("label");
+      cbLabel.textContent = ` Enable extra input for ${options.value}`;
+      cbLabel.setAttribute("for", "dynamicCheck");
+
+      dynamicArea.appendChild(dynamicCheckbox);
+      dynamicArea.appendChild(cbLabel);
+      dynamicArea.appendChild(document.createElement("br"));
+
+      // Error span for dynamic input
+      dynamicError = document.createElement("span");
+      dynamicError.className = "error";
+      dynamicArea.appendChild(dynamicError);
+
+      // Handle checkbox toggle
+      dynamicCheckbox.addEventListener("change", () => {
+        if (dynamicCheckbox.checked) {
+          dynamicInput = document.createElement("input");
+          dynamicInput.type = "text";
+          dynamicInput.id = "dynamicInput";
+          dynamicInput.placeholder = `Enter details for ${options.value}`;
+          dynamicArea.appendChild(document.createElement("br"));
+          dynamicArea.appendChild(dynamicInput);
+
+          dynamicInput.addEventListener("input", () => {
+            validateDynamic();
+            validateForm();
+          });
+        } else {
+          if (dynamicInput) {
+            dynamicInput.remove();
+            dynamicInput = null;
+          }
+          dynamicError.textContent = "";
+          validateForm();
+        }
+      });
+    }
+    validateForm();
+  });
+
+validateDynamic()
+function validateDynamic() {
+  if (dynamicCheckbox && dynamicCheckbox.checked) {
+    if (!dynamicInput || dynamicInput.value.trim().length < 2) {
+      dynamicError.textContent = "This field is required (min 2 chars)";
+      return false;
+    }
+    dynamicError.textContent = "";
+  }
+  return true; // if no checkbox or unchecked, it's valid
+}
 });
