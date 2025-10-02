@@ -342,4 +342,63 @@ document.addEventListener("DOMContentLoaded", () => {
     // Disable submit again
     submitBtn.disabled = true;
   });
+
+  const aiBtn = document.getElementById("aiAssistantBtn");
+  const chatWindow = document.getElementById("chatWindow");
+  const closeChat = document.getElementById("closeChat");
+  const chatMessages = document.getElementById("chatMessages");
+  const chatInput = document.getElementById("chatInput");
+  const sendChat = document.getElementById("sendChat");
+
+  aiBtn.addEventListener("click", () => {
+    chatWindow.style.display = "flex";
+  });
+
+  closeChat.addEventListener("click", () => {
+    chatWindow.style.display = "none";
+  });
+
+  function addMessage(sender, text) {
+    const msg = document.createElement("div");
+    msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function getAnswer(question) {
+    const q = question.toLowerCase();
+    if (q.includes("email")) {
+      return "You must use your Northeastern email (example: student@northeastern.edu).";
+    }
+    if (q.includes("phone")) {
+      return "The phone number must be in the format (XXX) XXX-XXXX.";
+    }
+    if (q.includes("zip")) {
+      return "The zip code must be exactly 5 digits.";
+    }
+    if (q.includes("required")) {
+      return "All fields are required except Street Address 2.";
+    }
+    if (q.includes("address")) {
+      return "Street Address 2 is optional. If left blank, it will be empty in the results table.";
+    }
+    return "Sorry, I don't know that yet. Please check the instructions.";
+  }
+
+  function handleChat() {
+    const question = chatInput.value.trim();
+    if (!question) return;
+    addMessage("You", question);
+    const answer = getAnswer(question);
+    addMessage("Assistant", answer);
+    chatInput.value = "";
+  }
+
+  sendChat.addEventListener("click", handleChat);
+  chatInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleChat();
+    }
+  });
 });

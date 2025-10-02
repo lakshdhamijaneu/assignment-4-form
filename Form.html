@@ -12,6 +12,22 @@
         <h3>Love something? Hate something? Let us know!</h3>
         Note : Fields marked with an asterisk(*) are mandatory
         <br /><br />
+
+        <button id="aiAssistantBtn" type="button" style="float: right">
+          AI Assistant
+        </button>
+        <div id="chatWindow" style="display: none">
+          <div id="chatHeader">
+            <span>AI Assistant</span>
+            <button id="closeChat">X</button>
+          </div>
+          <div id="chatMessages"></div>
+          <div id="chatInputArea">
+            <input type="text" id="chatInput" placeholder="Ask a question..." />
+            <button id="sendChat">Send</button>
+          </div>
+        </div>
+
         <form id="feedbackForm" method="post" novalidate>
           <label>Title*:</label>
           <input type="radio" name="title" value="miss" required /> Miss
